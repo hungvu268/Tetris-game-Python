@@ -2,8 +2,11 @@ import pygame as pg
 
 vec = pg.math.Vector2
 
+
+TEXT_COL = (255, 255, 255)
 FPS = 60
 FIELD_COLOR = (48, 39, 32)
+BLACK_COLOR = (0, 0, 0)
 # FIELD_COLOR = (120, 0, 98)
 BG_COLOR = (24, 89, 117)
 
@@ -11,8 +14,9 @@ ANIM_TIME_INTERVAL = 150 #milliseconds
 FAST_ANIM_TIME_INTERVAL = 15
 
 SPRITE_DIR_PATH = 'sprites'
+BUTTON_DIR_PATH = 'button'
 
-TILE_SIZE = 50
+TILE_SIZE = 35
 FIELD_SIZE = FIELD_W, FIELD_H = 10, 20
 FIELD_RES = FIELD_W * TILE_SIZE, FIELD_H * TILE_SIZE
 
@@ -26,9 +30,12 @@ MOVE_DIRECTIONS = {'left': vec(-1, 0), 'right': vec(1, 0), 'down': vec(0, 1)}
 TETROMINOES = {
     'T': [(0, 0), (-1, 0), (1, 0), (0, -1)],
     'O': [(0, 0), (0, -1), (1, 0), (1, -1)],
-    'J': [(0, 0), (-1, 0), (0, -1), (0, -2)],
+    # 'J': [(0, 0), (-1, 0), (0, -1), (0, -2)],
     'L': [(0, 0), (1, 0), (0, -1), (0, -2)],
     'I': [(0, 0), (0, 1), (0, -1), (0, -2)],
     'Z': [(0, 0), (-1, 0), (0, -1), (1, -1)],
-    'S': [(0, 0), (1, 0), (0, -1), (-1, -1)]
+    'S': [(0, 0), (1, 0), (0, -1), (-1, -1)],
+    '+' : [(0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)],
+    'chunhat' :[(0, 0), (0, -1), (1, 0), (1, -1), (-1, 0), (-1, -1)]
+
 }

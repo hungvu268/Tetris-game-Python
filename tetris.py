@@ -1,6 +1,8 @@
 from settings import *
 import math
 from tetromino import Tetromino
+import button
+
 
 class Text:
     def __init__(self, app):
@@ -8,6 +10,7 @@ class Text:
 
     def draw(self):
         pass
+
 
 class Tetris:
     def __init__(self, app):
@@ -17,6 +20,8 @@ class Tetris:
         self.tetromino = Tetromino(self)
         self.next_tetromino = Tetromino(self, current=False)
         self.speed_up = False
+        # restart_button = pg.image.load("back ground/restart.png").convert_alpha()
+        # self.restart_button = button.Button(170, 400, restart_button, 1)
 
     def is_game_over(self):
         if self.tetromino.blocks[0].pos.y == INIT_POS_OFFSET[1]:
@@ -50,7 +55,13 @@ class Tetris:
     def check_tetromino_landing(self):
         if self.tetromino.landing:
             if self.is_game_over():
-                self.__init__(self.app)
+                # self.game_over()
+                for sprite in self.sprite_group:
+                    sprite.kill()
+                self.app.game_over = True
+                # if self.app.game_over_pressed == True:
+                #     self.__init__(self.app)
+
             else:
                 self.speed_up = False
                 self.put_tetromino_blocks_in_array()
@@ -69,9 +80,12 @@ class Tetris:
             self.speed_up = True
 
     def draw_grid(self):
-        for x in range(FIELD_W):
-            for y in range(FIELD_H):
-                pg.draw.rect(self.app.screen, 'black', (x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE), 1)
+        if self.app.game_over == True:
+            pass
+        else:
+            for x in range(FIELD_W):
+                for y in range(FIELD_H):
+                    pg.draw.rect(self.app.screen, 'black', (x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE), 1)
 
     def update(self):
         trigger = [self.app.anim_trigger, self.app.fast_anim_trigger][self.speed_up]
