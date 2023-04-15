@@ -51,21 +51,16 @@ class App:
         # self.screen.fill(color=BG_COLOR)
         # self.screen.fill(color=FIELD_COLOR, rect=(0, 0, *FIELD_RES))
         self.screen.blit(self.back_ground_image, (0, 0))
-        # self.draw_text("Day la GAME xep hinh", self.font, TEXT_COL, 400, 100)
-        # if self.game_over == True and self.restart_button.draw(self.screen):
-        #     self.game_over_pressed = True
+        self.text.draw()
         if self.game_over:
             # self.screen.fill(color=FIELD_COLOR)
             # self.screen.blit(self.back_ground_image, (0, 0))
             self.draw_text("Game Over", self.font, TEXT_COL, 175, 100)
             if self.restart_button.draw(self.screen):
-                self.__init__(menu)
+                self.__init__(self.menu)
             if self.main_menu_button.draw(self.screen):
                 self.menu.run()
-                # new_game = menu()
-                # new_game.run()
         self.tetris.draw()
-        self.text.draw()
         pg.display.flip()
 
     def draw_text(self, text, font, text_col, x, y):

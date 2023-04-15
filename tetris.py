@@ -2,14 +2,30 @@ from settings import *
 import math
 from tetromino import Tetromino
 import button
+import pygame.freetype as ft
 
 
 class Text:
     def __init__(self, app):
         self.app = app
+        self.font = ft.Font(FONT_PATH)
+        self.font2 = ft.Font('font/ShortBaby-Mg2w.ttf')
 
     def draw(self):
-        pass
+        if self.app.game_over:
+            self.font.render_to(self.app.screen, (WIN_W * 0.37, WIN_H * 0.25), text='SCORE', fgcolor='white',
+                                size=TILE_SIZE * 1.3, bgcolor='black')
+            self.font2.render_to(self.app.screen, (WIN_W * 0.37, WIN_H * 0.3), text=f'{self.app.tetris.score}',
+                                 fgcolor='white',
+                                 size=TILE_SIZE * 1.3, bgcolor='black')
+        else:
+            self.font.render_to(self.app.screen, (WIN_W * 0.6, WIN_H * 0.05), text='TETRIS', fgcolor='white',
+                                size=TILE_SIZE * 2, bgcolor='black')
+            self.font.render_to(self.app.screen, (WIN_W * 0.62, WIN_H * 0.7), text='SCORE', fgcolor='white',
+                                size=TILE_SIZE * 2, bgcolor='black')
+            self.font2.render_to(self.app.screen, (WIN_W * 0.62, WIN_H * 0.8), text=f'{self.app.tetris.score}',
+                                 fgcolor='white',
+                                 size=TILE_SIZE * 2, bgcolor='black')
 
 
 class Tetris:
@@ -20,8 +36,16 @@ class Tetris:
         self.tetromino = Tetromino(self)
         self.next_tetromino = Tetromino(self, current=False)
         self.speed_up = False
+
+        self.score = 0
+        self.full_lines = 0
+        self.points_per_lines = {0: 0, 1: 100, 2: 300, 3: 700, 4: 1500}
         # restart_button = pg.image.load("back ground/restart.png").convert_alpha()
         # self.restart_button = button.Button(170, 400, restart_button, 1)
+
+    def get_score(self):
+        self.score += self.points_per_lines[self.full_lines]
+        self.full_lines = 0
 
     def is_game_over(self):
         if self.tetromino.blocks[0].pos.y == INIT_POS_OFFSET[1]:
@@ -43,6 +67,7 @@ class Tetris:
                 for x in range(FIELD_W):
                     self.field_array[row][x].alive = False
                     self.field_array[row][x] = 0
+                self.full_lines += 1
 
     def put_tetromino_blocks_in_array(self):
         for block in self.tetromino.blocks:
@@ -55,12 +80,9 @@ class Tetris:
     def check_tetromino_landing(self):
         if self.tetromino.landing:
             if self.is_game_over():
-                # self.game_over()
                 for sprite in self.sprite_group:
                     sprite.kill()
                 self.app.game_over = True
-                # if self.app.game_over_pressed == True:
-                #     self.__init__(self.app)
 
             else:
                 self.speed_up = False
@@ -80,7 +102,7 @@ class Tetris:
             self.speed_up = True
 
     def draw_grid(self):
-        if self.app.game_over == True:
+        if self.app.game_over:
             pass
         else:
             for x in range(FIELD_W):
@@ -93,6 +115,7 @@ class Tetris:
             self.check_full_lines()
             self.tetromino.update()
             self.check_tetromino_landing()
+            self.get_score()
         self.sprite_group.update()
 
     def draw(self):
