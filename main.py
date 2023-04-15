@@ -18,7 +18,7 @@ class menu:
         self.back_ground_image = pg.image.load("back ground/new_back_ground.png").convert_alpha()
         self.singleplayer_button = button.Button(37, 200, singleplayer_image, 1)
         self.multiplayer_button = button.Button(37, 300, multiplayer_image, 1)
-        self.quit_button = button.Button(170, 400, quit_image, 1)
+        self.quit_button = button.Button(170, 500, quit_image, 1)
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -39,12 +39,11 @@ class menu:
             # self.draw_text("Day la GAME xep hinh", self.font, TEXT_COL, 160, 250)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
-                    # pygame.quit()
-                    # sys.exit()
                     run = False
 
             pg.display.update()
         pg.quit()
+        sys.exit()
 
 
 if __name__ == '__main__':
