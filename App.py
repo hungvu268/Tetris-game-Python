@@ -48,13 +48,9 @@ class App:
             self.clock.tick(FPS)
 
     def draw(self):
-        # self.screen.fill(color=BG_COLOR)
-        # self.screen.fill(color=FIELD_COLOR, rect=(0, 0, *FIELD_RES))
         self.screen.blit(self.back_ground_image, (0, 0))
         self.text.draw()
         if self.game_over:
-            # self.screen.fill(color=FIELD_COLOR)
-            # self.screen.blit(self.back_ground_image, (0, 0))
             self.draw_text("Game Over", self.font, TEXT_COL, 175, 100)
             if self.restart_button.draw(self.screen):
                 self.__init__(self.menu)

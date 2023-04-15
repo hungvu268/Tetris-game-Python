@@ -34,9 +34,8 @@ class menu:
                 app.run()
             if self.quit_button.draw(self.screen):
                 run = False
-            if self.multiplayer_button.draw(self.screen):
-                pass
-            # self.draw_text("Day la GAME xep hinh", self.font, TEXT_COL, 160, 250)
+            # if self.multiplayer_button.draw(self.screen):
+            #     pass
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     run = False
@@ -49,5 +48,3 @@ class menu:
 if __name__ == '__main__':
     game = menu()
     game.run()
-    # app = App()
-    # app.run()

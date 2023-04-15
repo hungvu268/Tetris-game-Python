@@ -7,7 +7,6 @@ TEXT_COL = (255, 255, 255)
 FPS = 60
 FIELD_COLOR = (48, 39, 32)
 BLACK_COLOR = (0, 0, 0)
-# FIELD_COLOR = (120, 0, 98)
 BG_COLOR = (24, 89, 117)
 FONT_PATH = 'font/Bricktetris-8MdZ0.otf'
 ANIM_TIME_INTERVAL = 150 #milliseconds

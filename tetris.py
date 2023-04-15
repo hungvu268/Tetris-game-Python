@@ -40,8 +40,6 @@ class Tetris:
         self.score = 0
         self.full_lines = 0
         self.points_per_lines = {0: 0, 1: 100, 2: 300, 3: 700, 4: 1500}
-        # restart_button = pg.image.load("back ground/restart.png").convert_alpha()
-        # self.restart_button = button.Button(170, 400, restart_button, 1)
 
     def get_score(self):
         self.score += self.points_per_lines[self.full_lines]
